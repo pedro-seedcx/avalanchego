@@ -4,9 +4,9 @@
 package secp256k1fx
 
 import (
+	"encoding/hex"
 	"errors"
 	"fmt"
-
 	"github.com/ava-labs/avalanchego/cache"
 	"github.com/ava-labs/avalanchego/utils/crypto"
 	"github.com/ava-labs/avalanchego/utils/hashing"
@@ -184,6 +184,8 @@ func (fx *Fx) VerifyCredentials(utx UnsignedTx, in *Input, cred *Credential, out
 	}
 
 	txHash := hashing.ComputeHash256(utx.Bytes())
+	fmt.Printf("INNNNN utx.Bytes() : %s", hex.EncodeToString(utx.Bytes()))
+	fmt.Printf("INNNNN txHash : %s", hex.EncodeToString(txHash))
 	for i, index := range in.SigIndices {
 		// Make sure the input references an address that exists
 		if index >= uint32(len(out.Addrs)) {
